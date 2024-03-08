@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import './App.css'
+import PlaidLink from './components/PlaidLink/PlaidLink';
 
 function App() {
   const [linkToken, setLinkToken] = useState(null);
@@ -7,7 +8,7 @@ function App() {
   const API_ENDPOINT = import.meta.env.VITE_API_ENDPOINT;
 
   const generateToken = async () => {
-    const response = await fetch(API_ENDPOINT, {
+    const response = await fetch(API_ENDPOINT +"/api/create_link_token", {
       method: 'POST',
     });
     const data = await response.json();
@@ -21,9 +22,7 @@ function App() {
   return (
     <>
       <h1>Project W</h1>
-      {linkToken != null ? <>
-        <div className="card"> we linked! </div>
-      </> : <></>}   
+      {linkToken != null ? <PlaidLink linkToken={linkToken} />:<></>}   
     </>
   )
 }
