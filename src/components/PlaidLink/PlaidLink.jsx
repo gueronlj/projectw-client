@@ -2,6 +2,7 @@
 import { useCallback, useState } from 'react';
 import { usePlaidLink } from 'react-plaid-link';
 import AccountsTable from '../AccountsTable/AccountsTable';
+import TransactionsTable from '../TransactionsTable/TransactionsTable';
 
 const PlaidLink = ({ linkToken }) => {
     const [authorized, setAuthorized] = useState(false);
@@ -56,18 +57,22 @@ const PlaidLink = ({ linkToken }) => {
     const { open, ready } = usePlaidLink(config);
 
     return (<>
-        <button onClick={() => open()} disabled={!ready}>
-            Add bank account
-        </button>
-
         {authorized ? 
-            <button onClick={handleGetAccounts}>My Accounts</button>: <></>}
+            <button onClick={handleGetAccounts}>Accounts</button>
+            : 
+            <button onClick={() => open()} disabled={!ready}>
+                Add bank account
+            </button>}
 
-        {loading ? 
+        {loading && !accounts? 
             <p>Loading...</p> : <></>}
 
         {accounts != null ?
-            <AccountsTable data={accounts}/> : <></>} 
+            <div>
+                <AccountsTable data={accounts}/>
+                <TransactionsTable />
+            </div>
+            : <></>} 
     </>);
 }
 
