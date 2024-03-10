@@ -5,27 +5,27 @@ import AccountsTable from '../AccountsTable/AccountsTable';
 import TransactionsTable from '../TransactionsTable/TransactionsTable';
 
 const PlaidLink = ({ linkToken }) => {
-    const [authorized, setAuthorized] = useState(false);
+    const [authorized, setAuthorized] = useState(true);
     const [loading, setLoading] = useState(false);
     const [accounts, setAccounts] = useState(null)
+    const [transactionData, setTransactionData] = useState(null)
+    const [error, setError] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
+
     const onSuccess = useCallback((public_token) => {
         // send public_token to server
         const exchangePublicToken = async () => {
             try {
-                const response = await fetch('http://localhost:3000/api/exchange_public_token', {
+                await fetch('http://localhost:3000/api/exchange_public_token', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({ public_token: public_token }),
             });
-            const data = await response.json();
-            console.log({
-                item_id: data.item_id,
-            });
             setAuthorized(true);
             } catch (error) {
-                console.error(error);
+                setError(error);
             }           
         }
         exchangePublicToken();
@@ -36,17 +36,33 @@ const PlaidLink = ({ linkToken }) => {
             setLoading(true);
             const response = await fetch('http://localhost:3000/api/accounts',{
                 method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                }, 
         });
             const data = await response.json();
             setAccounts(data.accounts);
         } catch (error) {
-            console.log(error);
+            console.error(error);
         } finally {
             setLoading(false);
-            console.log(accounts);
+        }
+    }
+
+    const getTransactions = async () => {
+        try {
+            setIsLoading(true);
+            const response = await fetch('http://localhost:3000/api/transactions', {
+                method: 'GET',            
+            });
+            const data = await response.json();
+            if (data.error != null ) {
+                setError(data.error);
+                setIsLoading(false);
+                return;
+            }
+            setTransactionData(data);
+            setIsLoading(false);
+            setError(null);                      
+        } catch (error) {
+            setError(error);
         }
     }
 
@@ -57,6 +73,9 @@ const PlaidLink = ({ linkToken }) => {
     const { open, ready } = usePlaidLink(config);
 
     return (<>
+        {error != null && 
+            <p>Error: {error}</p>}
+
         {authorized ? 
             <button onClick={handleGetAccounts}>Accounts</button>
             : 
@@ -64,15 +83,18 @@ const PlaidLink = ({ linkToken }) => {
                 Add bank account
             </button>}
 
-        {loading && !accounts? 
-            <p>Loading...</p> : <></>}
+        {loading && !accounts && 
+            <p>Loading...</p>}
+        
+        <button onClick={getTransactions}>
+            {isLoading ? "Loading..." : `Show transactions`}
+        </button>
 
-        {accounts != null ?
-            <div>
-                <AccountsTable data={accounts}/>
-                <TransactionsTable />
-            </div>
-            : <></>} 
+        {accounts != null &&           
+            <AccountsTable data={accounts}/>}
+
+        {transactionData != null &&
+            <TransactionsTable data={transactionData}/>}        
     </>);
 }
 

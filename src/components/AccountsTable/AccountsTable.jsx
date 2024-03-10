@@ -3,8 +3,6 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
         
 const AccountsTable = ({ data }) => {
-    console.log(data);
-   
     const parsedData = data.map((account) => {
         return {
             number: account.mask,
