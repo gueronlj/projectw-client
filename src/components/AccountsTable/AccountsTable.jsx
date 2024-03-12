@@ -22,7 +22,7 @@ const AccountsTable = ({ data }) => {
     ];
 
     return (
-        <DataTable value={parsedData} tableStyle={{ maxWidth: '60rem' }}>
+        <DataTable value={parsedData} tableStyle={{ maxWidth: '45rem' }}>
             {columns.map((col) => (
                 <Column key={col.field} field={col.field} header={col.header} onClick={handleSelect}/>
             ))}

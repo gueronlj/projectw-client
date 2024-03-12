@@ -2,13 +2,13 @@
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 
-const TransactionsTable = ({data}) => {
+const BalancesTable = ({data}) => {
     return(
-        <DataTable value={data} tableStyle={{ maxWidth: '45rem' }}>
+        <DataTable value={data} tableStyle={{ minWidth: '50rem' }}>
             <Column field="date" header="Date" />
             <Column field="name" header="Name" />
             <Column field="amount" header="Amount" />
         </DataTable>
     )
 }
-export default TransactionsTable;
+export default BalancesTable;
