@@ -24,7 +24,9 @@ const PlaidLink = ({ linkToken }) => {
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ public_token: public_token }),
+                body: JSON.stringify({ 
+                    public_token: public_token, 
+                }),
             });
             setAuthorized(true);
             } catch (error) {
@@ -69,10 +71,12 @@ const PlaidLink = ({ linkToken }) => {
 
     const getInvestments = async () => {
         const data = await getData('investments');
+        console.log(data);
     }
 
     const getItem = async () => {
         const data = await getData('item');
+        console.log(data);
     }
 
     const getRecuringTransactions = async () => {
@@ -82,8 +86,9 @@ const PlaidLink = ({ linkToken }) => {
 
     const config = {
         token: linkToken,
-        onSuccess,
-    };
+        onSuccess
+    }
+    
     const { open, ready } = usePlaidLink(config);
 
     return (<>
