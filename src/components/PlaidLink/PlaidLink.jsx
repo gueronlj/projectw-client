@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { useCallback, useState } from 'react';
 import { usePlaidLink } from 'react-plaid-link';
 import AccountsTable from '../AccountsTable/AccountsTable';

@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
         
