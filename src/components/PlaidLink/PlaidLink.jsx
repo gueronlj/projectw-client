@@ -14,6 +14,7 @@ const PlaidLink = ({ linkToken }) => {
     const [loadingLiabilities, setLoadingLiabilities] = useState(false)
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
+    const [currentUser, setCurrentUser] = useState({id: "007"});
 
     const onSuccess = useCallback((public_token) => {
         // send public_token to server
@@ -25,7 +26,8 @@ const PlaidLink = ({ linkToken }) => {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({ 
-                    public_token: public_token, 
+                    public_token: public_token,
+                    user_id: currentUser.id 
                 }),
             });
             setAuthorized(true);
@@ -39,14 +41,17 @@ const PlaidLink = ({ linkToken }) => {
     const getData = async (endpoint) => {
         try {
             const response = await fetch(`http://localhost:3000/api/${endpoint}`, {
-                method: 'GET'
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ user_id: currentUser.id }),
             });
             const data = await response.json();
             if (data.error) {
                 setError(data.error);
                 return;
-            }
-            console.log(data);    
+            }   
             setError(null);
             return data;
         }catch(error){

@@ -11,6 +11,9 @@ function App() {
   const generateToken = async () => {
     const response = await fetch(API_ENDPOINT +"/api/create_link_token", {
       method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify({ 
         user_id: currentUser.id 
       }),
