@@ -15,11 +15,11 @@
 
 a {
   font-weight: 500;
-  color: #646cff;
+  color: #ffffff;
   text-decoration: inherit;
 }
 a:hover {
-  color: #535bf2;
+  color: #52e274;
 }
 
 body {
@@ -42,7 +42,7 @@ button {
   font-size: 1em;
   font-weight: 400;
   font-family: inherit;
-  background-color: #426a50;
+  background-color: none;
   cursor: pointer;
   transition: border-color 0.25s;
 }

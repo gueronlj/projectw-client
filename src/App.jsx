@@ -28,7 +28,6 @@ function App() {
 
   return (
     <>
-      <h2>Project W</h2>
       {linkToken != null && <PlaidLink linkToken={linkToken} />}   
     </>
   )

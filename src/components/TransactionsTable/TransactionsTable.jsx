@@ -31,7 +31,7 @@ const TransactionsTable = ({currentUser}) => {
             {error && <p>{error.message}</p>}
             {loading && <p>Loading...</p>}
             {data !== null &&
-                <DataTable value={data} tableStyle={{ maxWidth: '45rem' }}>
+                <DataTable value={data} tableStyle={{ minWidth: '45rem' }}>
                     <Column field="date" header="Date" />
                     <Column field="name" header="Name" />
                     <Column field="amount" header="Amount" />

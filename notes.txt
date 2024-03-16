@@ -15,20 +15,18 @@ Rent: 30-35% Utilities: 5-10% Groceries: 10-15% Transportation: 10-15% Healthcar
 current user is hard-coded.
 
 TODO:
--Fix: Check if user already exists bfeore creatiung new, if exists then modify.
+-Fix: Check if user already exists before creating new, if exists then modify.
 
 -user can have many items, only 1 access key.
 
 -User auth 
 
--Fix: the need to fetch treansactions multiple times
-
 -make account id 'decoder' (display pretty name based on crazy id string)
-
--implement routers
 
 -Fix: United Airlines shows -500 every month, not showing up on recurring??
 
 -make custom data parser to parse Transactions
 
 -make transactions query based on specific accounts
+
+-only show buttons for products owned

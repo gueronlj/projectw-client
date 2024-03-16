@@ -1,0 +1,35 @@
+.main{
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+    width: 100vw;
+}
+
+.sideMenu{
+    width: 90px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px;
+    border-right: 1px solid #e5e5e5;
+}
+
+.sideMenu li{
+    list-style-type: none;
+    margin-bottom: 10px;
+}
+
+.sideMenu ul{
+    padding-inline-start: 0px;
+    text-align: left;
+}
+
+.content{
+    height: 100vh;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-grow: 1;
+}
