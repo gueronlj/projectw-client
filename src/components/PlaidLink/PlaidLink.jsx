@@ -5,11 +5,13 @@ import TransactionsTable from '../TransactionsTable/TransactionsTable';
 import LiabilitiesTable from '../LiabilitiesTable/LiabilitiesTable';
 import Recuring from '../Recurring/recurring';
 import Items from '../Items/items';
+import { Route, Routes } from "react-router-dom";
+import { Link } from 'react-router-dom'
 
 const PlaidLink = ({ linkToken }) => {
     const [authorized, setAuthorized] = useState(true);
     const [loading, setLoading] = useState(false);
-    const [accounts, setAccounts] = useState(null)
+   
     const [transactionData, setTransactionData] = useState(null)
     const [liabilities, setLiabilities] = useState(null)
     const [recurring, setRecurring] = useState(null)
@@ -39,33 +41,10 @@ const PlaidLink = ({ linkToken }) => {
             }           
         }
         exchangePublicToken();
+        console.log('linked');
     }, []);
 
-    const getData = async (endpoint) => {
-        try {
-            const response = await fetch(`http://localhost:3000/api/${endpoint}`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ user_id: currentUser.id }),
-            });
-            const data = await response.json();
-            if (data.error) {
-                setError(data.error);
-                return;
-            }   
-            setError(null);
-            return data;
-        }catch(error){
-            setError(error);
-        }
-    }
 
-    const handleGetAccounts = async () => {
-        const data = await getData('accounts');
-        setAccounts(data.accounts);
-    }
     //TODO: Must be called twice to get the transactions. WHY?
     const getTransactions = async () => {
         const data = await getData('transactions');
@@ -91,8 +70,7 @@ const PlaidLink = ({ linkToken }) => {
     const getRecuringTransactions = async () => {
         const data = await getData('transactions/recurring');
         console.log(data.incoming);
-        setRecurring(data);
-        
+        setRecurring(data); 
     }
 
     const config = {
@@ -109,48 +87,23 @@ const PlaidLink = ({ linkToken }) => {
         <button onClick={() => open()} disabled={!ready}>
             Add bank account
         </button>
-
-        {authorized && 
-            <button onClick={handleGetAccounts}>Accounts</button>}
-
-        <button onClick={getLiabilities}>
-            {loadingLiabilities ? "Loading..." : `Liabilities`}
-        </button>
-
-        <button onClick={getTransactions}>
-            {isLoading ? "Loading..." : `Transactions`}
-        </button>
-
-        <button onClick={getInvestments}>
-            {isLoading ? "Loading..." : `Investments`}
-        </button>
-
-        <button onClick={getItems}>
-            {isLoading ? "Loading..." : `Item Info`}
-        </button>
-
-        <button onClick={getRecuringTransactions}>
-            {isLoading ? "Loading..." : `Recuring`}
-        </button>
-
-
-        {loading && !accounts && 
-            <h2>Loading...</h2>}
-
-        {accounts != null &&           
-            <AccountsTable data={accounts}/>}
-
-        {transactionData != null &&
-            <TransactionsTable data={transactionData}/>}
         
-        {liabilities != null &&
-            <LiabilitiesTable data={liabilities}/>}
-        
-        {recurring != null &&
-            <Recuring data={recurring}/>}
-        
-        {item != null &&
-            <Items item={item}/>}
+        <div>
+            <Link to="/">Accounts</Link><br/>
+            <Link to="/transactions">Transactions</Link><br/>
+            <Link to="/liabilities">Liabilities</Link><br/>
+            <Link to="/recurring">Recurring</Link><br/>
+            <Link to="/item">Item</Link><br/>
+        </div>
+       
+
+        <Routes>
+            <Route path="/" element={<AccountsTable currentUser={currentUser}/>}/>
+            <Route path="/transactions" element={<TransactionsTable currentUser={currentUser}/>}/>
+            <Route path="/liabilities" element={<LiabilitiesTable currentUser={currentUser}/>}/>
+            <Route path="/recurring" element={<Recuring currentUser={currentUser}/>}/>
+            <Route path="/item" element={<Items currentUser={currentUser}/>}/>
+        </Routes>
     </>);
 }
 

@@ -1,19 +1,39 @@
 import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
+import { useEffect, useState } from 'react';
+import getData from '../../utils/getData';
 
-const LiabilitiesTable = ({data}) => {
+const LiabilitiesTable = ({currentUser}) => {
+    const [data, setData] = useState(null);
+    const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(false);
 
-    const parsedData = {  
-        name: data.name,
-        balances: `$${data.balances?.current?.toFixed(2)}`
+    const getLiabilities = async () => {
+        try {
+            setLoading(true);
+            const data = await getData('liabilities', currentUser.id);
+            setError(data)
+        } catch (error) {
+            setError(error);
+        } finally {
+            setLoading(false);
+        }
     }
 
-    // return(<>
-    //     { data != null &&           
-    //         <DataTable value={parsedData} tableStyle={{ minWidth: '50rem' }}>
-    //             <Column field="name" header="Name" />
-    //             <Column field="balances" header="Amount" />
-    //         </DataTable>}       
-    // </>)
+    useEffect(() => {
+        getLiabilities();
+    }, []);
+
+    return(
+        <div>
+            {error && <p>{error}</p>}
+            {loading && <p>Loading...</p>}
+            { data !== null && !error &&          
+                <DataTable value={data.balances.current} tableStyle={{ minWidth: '50rem' }}>
+                    <Column field="name" header="Name" />
+                    <Column field="balances" header="Amount" />
+                </DataTable>}       
+        </div>
+    )
 }
 export default LiabilitiesTable;
