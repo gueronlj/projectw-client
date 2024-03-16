@@ -10,3 +10,19 @@ Rent: 30-35% Utilities: 5-10% Groceries: 10-15% Transportation: 10-15% Healthcar
 8. Do you have an emergency fund in place for unexpected expenses? 
 9. Are you currently contributing to any retirement accounts or investment portfolios? 
 10. How comfortable are you with risk when it comes to investing or saving for the future?
+
+***REMINDER!!!***
+current user is hard-coded.
+
+TODO:
+-Check if user already exists bfeore creatiung new, if exists then modify.
+
+-user can have many items, only 1 access key.
+
+-User auth 
+
+-Fix the need to fetch treansactions multiple times
+
+-make account id 'decoder' (display pretty name based on crazy id string)
+
+-implement routers

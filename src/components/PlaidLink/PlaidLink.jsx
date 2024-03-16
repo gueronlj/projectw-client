@@ -3,6 +3,8 @@ import { usePlaidLink } from 'react-plaid-link';
 import AccountsTable from '../AccountsTable/AccountsTable';
 import TransactionsTable from '../TransactionsTable/TransactionsTable';
 import LiabilitiesTable from '../LiabilitiesTable/LiabilitiesTable';
+import Recuring from '../Recurring/recurring';
+import Items from '../Items/items';
 
 const PlaidLink = ({ linkToken }) => {
     const [authorized, setAuthorized] = useState(true);
@@ -10,6 +12,8 @@ const PlaidLink = ({ linkToken }) => {
     const [accounts, setAccounts] = useState(null)
     const [transactionData, setTransactionData] = useState(null)
     const [liabilities, setLiabilities] = useState(null)
+    const [recurring, setRecurring] = useState(null)
+    const [item, setItem] = useState(null)
     const [loadingLiabilities, setLoadingLiabilities] = useState(false)
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
@@ -78,14 +82,17 @@ const PlaidLink = ({ linkToken }) => {
         console.log(data);
     }
 
-    const getItem = async () => {
+    const getItems = async () => {
         const data = await getData('item');
         console.log(data);
+        setItem(data.item);
     }
 
     const getRecuringTransactions = async () => {
         const data = await getData('transactions/recurring');
-        console.log(data);
+        console.log(data.incoming);
+        setRecurring(data);
+        
     }
 
     const config = {
@@ -118,13 +125,14 @@ const PlaidLink = ({ linkToken }) => {
             {isLoading ? "Loading..." : `Investments`}
         </button>
 
-        <button onClick={getItem}>
-            {isLoading ? "Loading..." : `Item`}
+        <button onClick={getItems}>
+            {isLoading ? "Loading..." : `Item Info`}
         </button>
 
         <button onClick={getRecuringTransactions}>
             {isLoading ? "Loading..." : `Recuring`}
         </button>
+
 
         {loading && !accounts && 
             <h2>Loading...</h2>}
@@ -137,6 +145,12 @@ const PlaidLink = ({ linkToken }) => {
         
         {liabilities != null &&
             <LiabilitiesTable data={liabilities}/>}
+        
+        {recurring != null &&
+            <Recuring data={recurring}/>}
+        
+        {item != null &&
+            <Items item={item}/>}
     </>);
 }
 
