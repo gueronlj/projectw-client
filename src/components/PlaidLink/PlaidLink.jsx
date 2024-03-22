@@ -9,7 +9,7 @@ import style from './style.module.css';
 import Header from '../Header/header';
 import SideMenu from '../SideMenu/SideMenu';
 
-const PlaidLink = () => {
+const PlaidLink = ({linkToken}) => {
     const [error, setError] = useState(null);
     const [currentUser, setCurrentUser] = useState({id: "007"});
 
@@ -19,7 +19,8 @@ const PlaidLink = () => {
             
             <div className={style.main}>
                 
-                <SideMenu/>
+                <SideMenu
+                    linkToken={linkToken}/>
 
                 <div className={style.content}>
                     {error && 

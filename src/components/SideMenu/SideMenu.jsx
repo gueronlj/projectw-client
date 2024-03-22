@@ -4,6 +4,7 @@ import style from './style.module.css';
 import { useCallback, useState } from 'react';
 
 const SideMenu = ( {linkToken} ) => {
+    const [error, setError] = useState(null);
 
     const onSuccess = useCallback((public_token) => {
         const exchangePublicToken = async () => {
@@ -18,7 +19,6 @@ const SideMenu = ( {linkToken} ) => {
                     user_id: currentUser.id 
                 }),
             });
-            setAuthorized(true);
             } catch (error) {
                 setError(error);
             }           
