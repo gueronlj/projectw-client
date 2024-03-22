@@ -2,11 +2,14 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { useEffect, useState } from 'react';
 import getData from '../../utils/getData';
+import { useAuth0 } from "@auth0/auth0-react";
 
 const Recuring = ({currentUser}) => {
+    const { isAuthenticated, isLoading } = useAuth0();
     const [data, setData] = useState(null);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
+
     const getRecurring = async () => {
         try {
             setLoading(true);
@@ -40,7 +43,6 @@ const Recuring = ({currentUser}) => {
             setLoading(false);
         }
     }
-    
 
     const incomingColumns = [
         {field: 'account_id', header: 'Account'},
@@ -60,6 +62,18 @@ const Recuring = ({currentUser}) => {
         getRecurring();
     }, []);
 
+    if (isLoading){
+        return(
+            <h3>Loading...</h3>
+        )
+    }
+
+    if (!isAuthenticated){
+        return(
+            <h3>Log in to view accounts</h3>
+        )
+    }
+
     return (
         <div>
             {error && <p>{error.message}</p>}
@@ -78,8 +92,7 @@ const Recuring = ({currentUser}) => {
                         <Column key={col.field} field={col.field} header={col.header}/>
                     ))}
                 </DataTable>
-            </>}
-            
+            </>}         
         </div>
     )
 }

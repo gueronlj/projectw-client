@@ -2,8 +2,10 @@ import { DataTable } from 'primereact/datatable';
 import { Column } from 'primereact/column';
 import { useEffect, useState } from 'react';
 import getData from '../../utils/getData';
+import { useAuth0 } from "@auth0/auth0-react";
         
 const AccountsTable = ( {currentUser} ) => {
+    const { isAuthenticated, isLoading } = useAuth0();
     const [accounts, setAccounts] = useState(null)
 
     const getAccounts = async () => {
@@ -32,6 +34,18 @@ const AccountsTable = ( {currentUser} ) => {
     useEffect(() => {
         getAccounts();
     }, []);
+
+    if (isLoading){
+        return(
+            <h3>Loading...</h3>
+        )
+    }
+
+    if (!isAuthenticated){
+        return(
+            <h3>Log in to view accounts</h3>
+        )
+    }
 
     return (<>
         {accounts !== null && 

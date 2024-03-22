@@ -1,0 +1,19 @@
+.sideMenu{
+    width: 90px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px;
+    border-right: 1px solid #e5e5e5;
+}
+
+.sideMenu li{
+    list-style-type: none;
+    margin-bottom: 10px;
+}
+
+.sideMenu ul{
+    padding-inline-start: 0px;
+    text-align: left;
+}
