@@ -4,8 +4,8 @@ import { useEffect, useState } from 'react';
 import getData from '../../utils/getData';
 import { useAuth0 } from "@auth0/auth0-react";
 
-const Recuring = ({currentUser}) => {
-    const { isAuthenticated, isLoading } = useAuth0();
+const Recuring = () => {
+    const { isAuthenticated, isLoading, user } = useAuth0();
     const [data, setData] = useState(null);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
@@ -13,7 +13,7 @@ const Recuring = ({currentUser}) => {
     const getRecurring = async () => {
         try {
             setLoading(true);
-            const data = await getData('transactions/recurring', currentUser.id);
+            const data = await getData('transactions/recurring', user.email);
             console.log(data);
             const parsedIncoming = data.incoming.map((item) => {
                 return {

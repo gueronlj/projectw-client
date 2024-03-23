@@ -4,13 +4,13 @@ import { useEffect, useState } from 'react';
 import getData from '../../utils/getData';
 import { useAuth0 } from "@auth0/auth0-react";
         
-const AccountsTable = ( {currentUser} ) => {
-    const { isAuthenticated, isLoading } = useAuth0();
+const AccountsTable = () => {
+    const { isAuthenticated, isLoading, user } = useAuth0();
     const [accounts, setAccounts] = useState(null)
 
     const getAccounts = async () => {
         try {
-            const data = await getData('accounts', currentUser.id);
+            const data = await getData('accounts', user.email);
             console.log(data);
             const parsedData = data.accounts.map((account) => {
                 return {

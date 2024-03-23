@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import getData from '../../utils/getData';
 import { useAuth0 } from "@auth0/auth0-react";
 
-const Items = ( {currentUser} ) => {
-    const { isAuthenticated, isLoading } = useAuth0();
+const Items = () => {
+    const { isAuthenticated, isLoading, user } = useAuth0();
     const [data, setData] = useState(null);
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
@@ -11,7 +11,7 @@ const Items = ( {currentUser} ) => {
     const getItemInfo = async () => {
         try {
             setLoading(true);
-            const data = await getData('item', currentUser.id);           
+            const data = await getData('item', user.email);           
             console.log(data);
             setData(data.item);
             setError(null);
