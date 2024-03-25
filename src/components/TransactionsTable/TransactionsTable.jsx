@@ -45,7 +45,7 @@ const TransactionsTable = () => {
             {error && <p>{error.message}</p>}
             {loading && <p>Loading...</p>}
             {data !== null &&
-                <DataTable value={data} tableStyle={{ minWidth: '45rem' }}>
+                <DataTable value={data}>
                     <Column field="date" header="Date" />
                     <Column field="name" header="Name" />
                     <Column field="amount" header="Amount" />

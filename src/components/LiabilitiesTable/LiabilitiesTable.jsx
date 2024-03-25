@@ -43,7 +43,7 @@ const LiabilitiesTable = () => {
             {error && <p>{error}</p>}
             {loading && <p>Loading...</p>}
             { data !== null && !error &&          
-                <DataTable value={data.balances.current} tableStyle={{ minWidth: '50rem' }}>
+                <DataTable value={data.balances.current}>
                     <Column field="name" header="Name" />
                     <Column field="balances" header="Amount" />
                 </DataTable>}       

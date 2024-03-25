@@ -17,16 +17,19 @@ current user is hard-coded.
 TODO:
 -Fix: Check if user already exists before creating new, if exists then modify.
 
--user can have many items, only 1 access key.
-
--User auth 
+-user can have many items, only 1 access key. 
 
 -make account id 'decoder' (display pretty name based on crazy id string)
 
 -Fix: United Airlines shows -500 every month, not showing up on recurring??
-
--make custom data parser to parse Transactions
+    -make custom data parser to parse Transactions
 
 -make transactions query based on specific accounts
 
 -only show buttons for products owned
+
+-centralize error system
+
+-Dashboard component, shows all the main stats
+
+-disable sidebar butons when not logged in

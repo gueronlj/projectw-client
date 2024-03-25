@@ -49,7 +49,7 @@ const AccountsTable = () => {
 
     return (<>
         {accounts !== null && 
-            <DataTable value={accounts} tableStyle={{ minWidth: '45rem' }}>
+            <DataTable value={accounts}>
                 {columns.map((col) => (
                     <Column key={col.field} field={col.field} header={col.header}/>
                 ))}

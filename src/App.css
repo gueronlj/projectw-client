@@ -1,4 +1,9 @@
 
+#root{
+    display: flex;
+    flex-direction: column;
+}
+
 .main{
     display: flex;
     flex-direction: row;
@@ -13,4 +18,9 @@
     flex-direction: column;
     align-items: flex-start;
     flex-grow: 1;
+}
+
+.p-datatable-table {
+    border-spacing: 20px;
+    max-width: 70vw;
 }

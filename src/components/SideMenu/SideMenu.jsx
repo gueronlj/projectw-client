@@ -11,7 +11,6 @@ const SideMenu = ( {linkToken} ) => {
     const onSuccess = useCallback((public_token) => {
         const exchangePublicToken = async () => {
             try {
-                console.log(user.email);
                 await fetch('http://localhost:3000/api/exchange_public_token', {
                 method: 'POST',
                 headers: {
@@ -39,8 +38,8 @@ const SideMenu = ( {linkToken} ) => {
     return (
         <div className={style.sideMenu}>   
             <ul>
-                <li><Link to="/">Accounts</Link><br/></li>
-                <li><Link to="/transactions">Transactions</Link></li>
+                <li><Link to="/">Accounts</Link></li>
+                <li><Link to="/transactions" >Transactions</Link></li>
                 <li><Link to="/liabilities">Liabilities</Link></li>
                 <li><Link to="/recurring">Recurring</Link></li>
                 <li><Link to="/item">Item</Link></li>

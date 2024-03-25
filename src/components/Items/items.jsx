@@ -43,11 +43,12 @@ const Items = () => {
             {error && <p>{error.message}</p>}
             {loading && <p>Loading...</p>}
             {data !== null && <>
+                <h3>Item Id: {data.item_id}</h3>
+                <h3>Institution Id: {data.institution_id}</h3>
                 {data.billed_products.map((product) => (
-                    <p key={product.field}>{product}</p>
+                    <p>{product}</p>
                 ))}
-                <h3>ID: {data.item_id}</h3>
-                <h3>Institution: {data.institution_id}</h3></>}     
+            </>}     
         </div>    
     );
 }

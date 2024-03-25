@@ -80,14 +80,14 @@ const Recuring = () => {
             {loading && <p>Loading...</p>}
             {data !== null &&<>
                 <h2>Income</h2>
-                <DataTable value={data.incoming} tableStyle={{ maxWidth: '45rem' }}>
+                <DataTable value={data.incoming}>
                     {incomingColumns.map((col) => (
                         <Column key={col.field} field={col.field} header={col.header}/>
                     ))}
                 </DataTable>
                 
                 <h2>Expenses</h2>
-                <DataTable value={data.outgoing} tableStyle={{ maxWidth: '45rem' }}>
+                <DataTable value={data.outgoing}>
                     {outgoingColumns.map((col) => (
                         <Column key={col.field} field={col.field} header={col.header}/>
                     ))}
