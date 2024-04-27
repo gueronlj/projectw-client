@@ -3,7 +3,7 @@ import { Column } from 'primereact/column';
 
 const BalancesTable = ({data}) => {
     return(
-        <DataTable value={data} tableStyle={{ minWidth: '50rem' }}>
+        <DataTable value={data}>
             <Column field="date" header="Date" />
             <Column field="name" header="Name" />
             <Column field="amount" header="Amount" />

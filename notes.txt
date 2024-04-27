@@ -17,16 +17,29 @@ current user is hard-coded.
 TODO:
 -Fix: Check if user already exists before creating new, if exists then modify.
 
--user can have many items, only 1 access key.
-
--User auth 
+-user can have many items, only 1 access key. 
 
 -make account id 'decoder' (display pretty name based on crazy id string)
 
 -Fix: United Airlines shows -500 every month, not showing up on recurring??
-
--make custom data parser to parse Transactions
+    -make custom data parser to parse Transactions
 
 -make transactions query based on specific accounts
 
 -only show buttons for products owned
+
+-centralize error system
+
+-Dashboard component, shows all the main stats
+
+-disable sidebar butons when not logged in
+
+*** Preventing duplicate Items
+Use the onSuccess callback metadata
+The onSuccess callback is called when a user successfully links an Item using Plaid Link. This callback provides metadata that you can use to prevent duplicate Items from being created. One approach is to require a user login prior to launching Plaid Link so that you can retrieve existing Items associated with the user.
+
+Then, before requesting an access_token, examine and compare the onSuccess callback metadata to the user's existing Items. You can compare a combination of the accounts’ institution_id, account name, and account mask to determine whether an end user has previously linked an account to your application. Do not exchange a public token for an access token if you detect a duplicate Item.
+
+While the mask value is usually the same as the last 4 digits of the account number, this is not the case at all institutions. Never detect duplicate Items by attempting to match a mask with an account number.
+
+making changes to this.
