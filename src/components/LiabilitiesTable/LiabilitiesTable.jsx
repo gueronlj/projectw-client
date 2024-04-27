@@ -40,6 +40,7 @@ const LiabilitiesTable = () => {
     
     return(
         <div>
+            <h2>Liabilities</h2>
             {error && <p>{error}</p>}
             {loading && <p>Loading...</p>}
             { data !== null && !error &&          

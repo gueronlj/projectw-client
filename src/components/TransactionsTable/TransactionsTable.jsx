@@ -15,7 +15,6 @@ const TransactionsTable = () => {
             setLoading(true);
             const data = await getData('transactions', user.email);
             setData(data.added);
-            console.log(data);
             setError(null);
         } catch (error) {
             setError(error);
@@ -42,6 +41,7 @@ const TransactionsTable = () => {
     
     return(
         <div>
+            <h2>Transactions</h2>
             {error && <p>{error.message}</p>}
             {loading && <p>Loading...</p>}
             {data !== null &&

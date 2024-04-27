@@ -14,7 +14,6 @@ const Recuring = () => {
         try {
             setLoading(true);
             const data = await getData('transactions/recurring', user.email);
-            console.log(data);
             const parsedIncoming = data.incoming.map((item) => {
                 return {
                     account_id: item.account_id,
@@ -79,14 +78,14 @@ const Recuring = () => {
             {error && <p>{error.message}</p>}
             {loading && <p>Loading...</p>}
             {data !== null &&<>
-                <h2>Income</h2>
+                <h2>Recurring Income</h2>
                 <DataTable value={data.incoming}>
                     {incomingColumns.map((col) => (
                         <Column key={col.field} field={col.field} header={col.header}/>
                     ))}
                 </DataTable>
                 
-                <h2>Expenses</h2>
+                <h2>Recurring Expenses</h2>
                 <DataTable value={data.outgoing}>
                     {outgoingColumns.map((col) => (
                         <Column key={col.field} field={col.field} header={col.header}/>

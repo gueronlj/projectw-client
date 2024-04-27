@@ -11,7 +11,6 @@ const AccountsTable = () => {
     const getAccounts = async () => {
         try {
             const data = await getData('accounts', user.email);
-            console.log(data);
             const parsedData = data.accounts.map((account) => {
                 return {
                     number: account.mask,
@@ -48,6 +47,7 @@ const AccountsTable = () => {
     }
 
     return (<>
+        <h2>Accounts</h2>
         {accounts !== null && 
             <DataTable value={accounts}>
                 {columns.map((col) => (

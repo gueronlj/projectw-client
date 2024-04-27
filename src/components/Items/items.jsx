@@ -12,7 +12,6 @@ const Items = () => {
         try {
             setLoading(true);
             const data = await getData('item', user.email);           
-            console.log(data);
             setData(data.item);
             setError(null);
         } catch (error) {
