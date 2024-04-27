@@ -16,11 +16,11 @@
     padding: 40px;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
     flex-grow: 1;
 }
 
 .p-datatable-table {
     border-spacing: 20px;
-    max-width: 70vw;
+    border: 1PX solid #e0e0e0;
+    border-radius: 3px;
 }
