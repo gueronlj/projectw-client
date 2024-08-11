@@ -14,7 +14,7 @@ const Recuring = () => {
         try {
             setLoading(true);
             const data = await getData('transactions/recurring', user.email);
-            const parsedIncoming = data.incoming.map((item) => {
+            const parsedIncoming = data?.incoming?.map((item) => {
                 return {
                     account_id: item.account_id,
                     description: item.description,
@@ -23,7 +23,7 @@ const Recuring = () => {
                 }
             });
         
-            const parsedOutgoing = data.outgoing.map((item) => {
+            const parsedOutgoing = data?.outgoing?.map((item) => {
                 return {
                     account_id: item.account_id,
                     description: item.description,
@@ -31,13 +31,16 @@ const Recuring = () => {
                     average_amount: `$${item.average_amount.amount.toFixed(2)}`
                 }
             });
+            if (data.error){
+                setError(data.error)
+            }
             setData({
                 incoming: parsedIncoming,
                 outgoing: parsedOutgoing
             });
-            setError(null);
+           
         } catch (error) {
-            setError(error);
+            console.log(error);
         } finally {
             setLoading(false);
         }
@@ -75,9 +78,10 @@ const Recuring = () => {
 
     return (
         <div>
-            {error && <p>{error.message}</p>}
+            <h2>Recurring</h2>
+            {error && <p>{error}</p>}
             {loading && <p>Loading...</p>}
-            {data !== null &&<>
+            {data?.length > 0 && <>
                 <h2>Recurring Income</h2>
                 <DataTable value={data.incoming}>
                     {incomingColumns.map((col) => (

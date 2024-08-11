@@ -7,10 +7,7 @@ const getData = async (endpoint, user_id) => {
             },
             body: JSON.stringify({ user_id: user_id }),
         });
-        const data = await response.json();
-        if (data.error) {
-            return data.error;
-        }   
+        const data = await response.json();  
         return data;
     }catch(error){
         return error;

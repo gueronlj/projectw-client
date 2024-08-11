@@ -15,9 +15,11 @@ const TransactionsTable = () => {
             setLoading(true);
             const data = await getData('transactions', user.email);
             setData(data.added);
-            setError(null);
+            if (data.error){
+                setError(data.error)
+            }
         } catch (error) {
-            setError(error);
+            console.log(error)
         } finally {
             setLoading(false);
         }
@@ -42,9 +44,9 @@ const TransactionsTable = () => {
     return(
         <div>
             <h2>Transactions</h2>
-            {error && <p>{error.message}</p>}
+            {error && <p>{error}</p>}
             {loading && <p>Loading...</p>}
-            {data !== null &&
+            {data?.length > 0 &&
                 <DataTable value={data}>
                     <Column field="date" header="Date" />
                     <Column field="name" header="Name" />

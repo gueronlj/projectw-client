@@ -14,9 +14,11 @@ const LiabilitiesTable = () => {
         try {
             setLoading(true);
             const data = await getData('liabilities', user.email);
-            setError(data)
+            if (data.error){
+                setError(data.error)
+            }
         } catch (error) {
-            setError(error);
+            console.log(error)
         } finally {
             setLoading(false);
         }
