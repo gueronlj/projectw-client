@@ -4,7 +4,13 @@ import { useAuth0 } from "@auth0/auth0-react";
 
 const Items = () => {
     const { isAuthenticated, isLoading, user } = useAuth0();
-    const [data, setData] = useState(null);
+    const [data, setData] = useState(
+        {
+            "item_id":"", 
+            "institution_id":"", 
+            "billed_products":[]
+        }
+    );
     const [error, setError] = useState(null);
     const [loading, setLoading] = useState(false);
 
@@ -40,14 +46,18 @@ const Items = () => {
     return (
         <div>   
             {error && <p>{error.message}</p>}
-            {loading && <p>Loading...</p>}
-            {data !== null && <>
-                <h3>Item Id: {data.item_id}</h3>
-                <h3>Institution Id: {data.institution_id}</h3>
-                {data.billed_products.map((product) => (
-                    <p>{product}</p>
-                ))}
-            </>}     
+            <h2>Item Info</h2>
+            {loading ? <p>Loading...</p> 
+                :
+            <>
+                {data && <>
+                    <h4>ID: {data.item_id}</h4>
+                    <h4>Institution: {data.institution_id}</h4>
+                    {data.billed_products.map((product) => (
+                        <p key={product}>{product}</p>
+                    ))}
+                </>} 
+            </>}   
         </div>    
     );
 }
