@@ -35,7 +35,9 @@ const AccountsTable = () => {
     ];
 
     useEffect(() => {
-        getAccounts();
+        if(isAuthenticated){
+            getAccounts();
+        }
     }, []);
 
     if (isLoading){

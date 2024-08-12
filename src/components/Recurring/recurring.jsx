@@ -81,7 +81,7 @@ const Recuring = () => {
             <h2>Recurring</h2>
             {error && <p>{error}</p>}
             {loading && <p>Loading...</p>}
-            {data?.length > 0 && <>
+            {data && <>
                 <h2>Recurring Income</h2>
                 <DataTable value={data.incoming}>
                     {incomingColumns.map((col) => (

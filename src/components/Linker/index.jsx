@@ -1,7 +1,9 @@
 import { usePlaidLink } from 'react-plaid-link';
 import { useCallback } from 'react';
+import { useAuth0 } from "@auth0/auth0-react";
 
 const Linker = ({linkToken}) =>  {
+    const { user, isAuthenticated, isLoading } = useAuth0();
 
     const onSuccess = useCallback((public_token) => {
         const exchangePublicToken = async () => {
@@ -13,7 +15,7 @@ const Linker = ({linkToken}) =>  {
                 },
                 body: JSON.stringify({ 
                     public_token: public_token,
-                    user_id: user.email 
+                    user_id: user?.email 
                 }),
             });
             } catch (error) {
@@ -29,11 +31,14 @@ const Linker = ({linkToken}) =>  {
     }
     const { open, ready } = usePlaidLink(config);
 
-    return (
-        <button onClick={() => open()} disabled={!ready}>
-            Link Bank
-        </button>
-    )
+    if (isAuthenticated) {
+        return (
+            <button onClick={() => open()} disabled={!ready}>
+                Link Bank
+            </button>
+        )
+    }
+   
 }
 
 export default Linker;
