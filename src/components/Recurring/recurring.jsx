@@ -78,7 +78,6 @@ const Recuring = () => {
 
     return (
         <div>
-            <h2>Recurring</h2>
             {error && <p>{error}</p>}
             {loading && <p>Loading...</p>}
             {data && <>

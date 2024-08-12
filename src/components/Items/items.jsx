@@ -19,7 +19,6 @@ const Items = () => {
             setLoading(true);
             const data = await getData('item', user.email);           
             setData(data.item);
-            setError(null);
         } catch (error) {
             setError(error);
         } finally {
@@ -47,17 +46,21 @@ const Items = () => {
         <div>   
             {error && <p>{error.message}</p>}
             <h2>Item Info</h2>
-            {loading ? <p>Loading...</p> 
+            {
+                loading ? <p>Loading...</p> 
                 :
             <>
                 {data && <>
                     <h4>ID: {data.item_id}</h4>
                     <h4>Institution: {data.institution_id}</h4>
-                    {data.billed_products.map((product) => (
-                        <p key={product}>{product}</p>
-                    ))}
+                    {
+                        data.billed_products.map((product) => (
+                            <p key={product}>{product}</p>
+                        ))
+                    }
                 </>} 
-            </>}   
+            </>
+            }   
         </div>    
     );
 }

@@ -14,14 +14,13 @@ Rent: 30-35% Utilities: 5-10% Groceries: 10-15% Transportation: 10-15% Healthcar
 ***REMINDER!!!***
 current user is hard-coded.
 
-TODO:
--Fix: Check if user already exists before creating new, if exists then modify.
+*TO DO* Check if user already exists before creating new, if exists then modify.
 
--user can have many items, only 1 access key. 
+*REMINDER* Generating Link token must happen at App level (WHY??)
 
--make account id 'decoder' (display pretty name based on crazy id string)
+*TO DO*make account id 'decoder' (display pretty name based on crazy id string)
 
--Fix: United Airlines shows -500 every month, not showing up on recurring??
+*TO DO* United Airlines shows -500 every month, not showing up on recurring??
     -make custom data parser to parse Transactions
 
 -make transactions query based on specific accounts
