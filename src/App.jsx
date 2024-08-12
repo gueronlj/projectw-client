@@ -9,8 +9,8 @@ import LoginButton from './components/Header/Login/LoginButton';
 function App() {
 
   const [linkToken, setLinkToken] = useState(null);
-  const { isAuthenticated, isLoading } = useAuth0();
-  
+  const { isAuthenticated, isLoading, user } = useAuth0();
+
   const API_ENDPOINT = import.meta.env.VITE_API_ENDPOINT;
 
   const generateToken = async () => { 
